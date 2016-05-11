@@ -1,7 +1,4 @@
-
-# coding: utf-8
-
-# In[70]:
+#!/usr/bin/env python
 
 # Ebay image retriever
 # retrieve images according to keywords and page numbers
@@ -14,10 +11,8 @@
 import urllib
 import bs4
 
-
-# In[81]:
-
 def get_img_links( key_word, pages ):
+    # get image links for user input keywords and number of pages
     image_urls = []
     for page_number in range(pages + 1):
         ebay_url = "http://www.ebay.com/sch/i.html?_pgn=" + str(page_number) + "&_nkw=" + key_word
@@ -26,17 +21,14 @@ def get_img_links( key_word, pages ):
             soup = bs4.BeautifulSoup(result_page, "html5lib")
         except:
             print "Error while making soup"
-        else:      
-            pass 
+        else:
+            pass
             #print "Soup is done"
         imgs = soup.find_all('img')
         for image in imgs:
             if image['src'].startswith('http://thumbs'):
                 image_urls.append(image['src'])
     return image_urls
-
-
-# In[ ]:
 
 def main():
     key_word = raw_input("Input keyword: ")
@@ -46,9 +38,3 @@ def main():
     print image_urls
 if __name__ == "__main__":
     main()
-
-
-# In[ ]:
-
-
-
